@@ -33,6 +33,8 @@ Public Class Form1
         Return Dns.GetHostEntry(GetHostName()).AddressList(0).ToString()
     End Function
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        
         FindingThreats()
         Me.BackColor = Color.DarkSlateGray
         Dim result As String = GetProcessText("arp", "-a", "")
@@ -75,10 +77,19 @@ Public Class Form1
             End If
             i += 1
         End While
-        treeIp = New TreeNode("172.17.220.200")
-        TreeView1.Nodes(0).Nodes.Add(treeIp)
-        EnterTheFolder("172.17.220.200", treeIp)
         TextBox1.Text = GetHostName()
+
+
+        '' for context menu
+        'For Each RootNode As TreeNode In TreeView1.Nodes
+        '    RootNode.ContextMenuStrip = ContextMenuStrip1
+        '    For Each ChildNode As TreeNode In RootNode.Nodes
+        '        ChildNode.ContextMenuStrip = ContextMenuStrip1
+        '    Next
+        'Next
+        ''context menu end
+
+
     End Sub
 
     Sub EnterTheFolder(ipAddress As String, treeIp As TreeNode)
@@ -169,5 +180,13 @@ Public Class Form1
             Catch ex As Exception
             End Try
         Next
+    End Sub
+
+    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+        Try
+            Dim path As String = TreeView1.SelectedNode.FullPath.ToString.Replace("Network", "\")
+            GetProcessText("explorer", path, "")
+        Catch
+        End Try
     End Sub
 End Class
