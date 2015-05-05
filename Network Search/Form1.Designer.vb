@@ -30,6 +30,11 @@ Partial Class Form1
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.TreeView2 = New System.Windows.Forms.TreeView()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -37,23 +42,23 @@ Partial Class Form1
         '
         Me.ListView1.Location = New System.Drawing.Point(12, 396)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(561, 169)
+        Me.ListView1.Size = New System.Drawing.Size(657, 74)
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 352)
+        Me.TextBox1.Location = New System.Drawing.Point(114, 355)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(130, 20)
         Me.TextBox1.TabIndex = 3
         '
         'TreeView1
         '
         Me.TreeView1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.TreeView1.Location = New System.Drawing.Point(12, 12)
+        Me.TreeView1.Location = New System.Drawing.Point(12, 42)
         Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(328, 325)
+        Me.TreeView1.Size = New System.Drawing.Size(309, 295)
         Me.TreeView1.TabIndex = 4
         '
         'ContextMenuStrip1
@@ -70,17 +75,65 @@ Partial Class Form1
         '
         'RichTextBox1
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(12, 571)
+        Me.RichTextBox1.Location = New System.Drawing.Point(12, 499)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(561, 23)
+        Me.RichTextBox1.Size = New System.Drawing.Size(657, 23)
         Me.RichTextBox1.TabIndex = 2
         Me.RichTextBox1.Text = ""
+        '
+        'TreeView2
+        '
+        Me.TreeView2.Location = New System.Drawing.Point(367, 42)
+        Me.TreeView2.Name = "TreeView2"
+        Me.TreeView2.Size = New System.Drawing.Size(302, 295)
+        Me.TreeView2.TabIndex = 5
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(396, 352)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(247, 23)
+        Me.Button1.TabIndex = 6
+        Me.Button1.Text = "Click to Separate Networks"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(23, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(116, 13)
+        Me.Label1.TabIndex = 7
+        Me.Label1.Text = "Shared files in Network"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(377, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(104, 13)
+        Me.Label2.TabIndex = 8
+        Me.Label2.Text = "Unshared  Networks"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(12, 358)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(60, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Host Name"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(611, 606)
+        Me.ClientSize = New System.Drawing.Size(691, 543)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TreeView2)
         Me.Controls.Add(Me.TreeView1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.RichTextBox1)
@@ -99,5 +152,10 @@ Partial Class Form1
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
+    Friend WithEvents TreeView2 As System.Windows.Forms.TreeView
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 
 End Class

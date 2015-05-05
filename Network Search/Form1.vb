@@ -35,8 +35,7 @@ Public Class Form1
         Return Dns.GetHostEntry(GetHostName()).AddressList(0).ToString()
     End Function
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        
+        Label1.Text = "All Ip's Sharing data in Network"
         FindingThreats()
         Me.BackColor = Color.DarkSlateGray
         Dim result As String = GetProcessText("arp", "-a", "")
@@ -93,6 +92,7 @@ Public Class Form1
 
 
     End Sub
+
 
     Sub EnterTheFolder(ipAddress As String, treeIp As TreeNode)
         Dim result As String = GetProcessText("net", "view " & ipAddress, "")
@@ -174,5 +174,44 @@ Public Class Form1
             GetProcessText("explorer", path, "")
         Catch
         End Try
+    End Sub
+
+    'Code to remove nodes from treeview1 to treeview2 that have not shared any data
+    Sub RemoveNodeTree()
+        Dim treeIp As TreeNode
+
+        Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
+        Dim i As Integer
+        treeIp = New TreeNode("Network")
+        TreeView2.Nodes.Add(treeIp)
+        i = 0
+        While i < size
+            treeIp = TreeView1.Nodes(0).Nodes(i)
+            If treeIp.Nodes.Count = 0 Then
+                treeIp = New TreeNode(TreeView1.Nodes(0).Nodes(i).Text)
+                TreeView1.Nodes(0).Nodes(i).Remove()
+                TreeView2.Nodes.Add(treeIp)
+                size -= 1
+                i -= 1
+            End If
+            
+            'If treeIp.Nodes.Count = 0 Then
+            '    TreeView2.Nodes.Add(treeIp)
+            'End If
+            i += 1
+        End While
+
+        'For Each treeIp In TreeView1.Nodes(0).Nodes
+        '    If (treeIp.Nodes.Count = 0) Then
+        '        TreeView2.Nodes.Add(treeIp)
+        '    End If
+        'Next
+
+        RichTextBox1.Text = i
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Label1.Text = "Shared files in Network"
+        RemoveNodeTree()
     End Sub
 End Class
