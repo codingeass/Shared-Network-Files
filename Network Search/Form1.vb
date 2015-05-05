@@ -11,11 +11,13 @@ Public Class Form1
     Shared Function GetProcessText(ByVal process As String, ByVal param As String, ByVal workingDir As String) As String
         Dim p As Process = New Process
         ' this is the name of the process we want to execute 
+        p.StartInfo.CreateNoWindow = True
         p.StartInfo.FileName = process
         If Not (workingDir = "") Then
             p.StartInfo.WorkingDirectory = workingDir
         End If
         p.StartInfo.Arguments = param
+
         ' need to set this to false to redirect output
         p.StartInfo.UseShellExecute = False
         p.StartInfo.RedirectStandardOutput = True
