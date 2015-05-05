@@ -159,22 +159,6 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'thread = New System.Threading.Thread(AddressOf FindingHost)
-        'thread.Start()
-        Dim strHostName As String = "aditya"
-        Dim strIPAddress As String = ""
-        'MsgBox(Dns.GetHostByAddress("172.17.221.10"))
-        Dim objAddressList() As System.Net.IPAddress = _
-            System.Net.Dns.GetHostEntry(strHostName).AddressList
-        For x = 0 To objAddressList.GetUpperBound(0)
-            If objAddressList(x).AddressFamily = Net.Sockets.AddressFamily.InterNetwork Then
-                strIPAddress = objAddressList(x).ToString
-                Exit For
-            End If
-        Next
-        RichTextBox1.AppendText(strIpAddress)
-    End Sub
     Sub FindingHost()
         For i = 1 To 254
             Try
