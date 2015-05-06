@@ -73,7 +73,6 @@ Public Class Form1
                     treeIp.Name = res1(2)
                     treeIp.Text = res1(2)
                     TreeView1.Nodes(0).Nodes.Add(treeIp)
-                    'EnterTheFolder(res1(2), treeIp)
                     Dim thread As Thread = New System.Threading.Thread(Sub() Me.EnterTheFolder(res1(2), treeIp))
                     thread.Start()
                     nodeCount += 1
@@ -110,29 +109,16 @@ Public Class Form1
         While i < res.Length
             If (Trim(res(i)).Split().Last = "Disk") Then
                 Try
-                    'MsgBox(TreeView1.Nodes(0).Nodes(0).FullPath)
-                    'Try
-                    '    If (counter = 0) Then
-                    '        Dim arr As TreeNode() = TreeView1.Nodes.Find(ipAddress, True)
-                    '        If arr.Length <> 0 Then
-                    '            Return
-                    '        End If
-                    '        If TreeView1.InvokeRequired And arr.Length = 0 Then
-                    '            MsgBox(arr.Length)
-                    '            TreeView1.Invoke(DirectCast(Sub() TreeView1.Nodes(0).Nodes.Add(treeIp), MethodInvoker))
-                    '        End If
-                    '    End If
-                    'Catch
-                    'End Try
                     If TreeView1.InvokeRequired Then
                         TreeView1.Invoke(DirectCast(Sub() TreeView1.Nodes(0).Nodes(TreeView1.Nodes(0).Nodes.IndexOf(treeIp)).Nodes.Add(New TreeNode(Trim(res(i).Replace("Disk", "")))), MethodInvoker))
+                    Else
+                        TreeView1.Nodes(0).Nodes(TreeView1.Nodes(0).Nodes.IndexOf(treeIp)).Nodes.Add(New TreeNode(Trim(res(i).Replace("Disk", ""))))
                     End If
                     counter = 1
                     'TreeView1.Nodes(0).Nodes(TreeView1.Nodes(0).Nodes.IndexOf(treeIp)).Nodes.Add(New TreeNode(Trim(res(i).Replace("Disk", ""))))
                 Catch m As Exception
                     MsgBox(m.Message)
                 End Try
-                'str += Trim(res(i).Replace("Disk", ""))
             End If
             i += 1
         End While
@@ -217,11 +203,8 @@ Public Class Form1
     End Function
 
     Sub AssignPCname()
-        'Dim treeIp As TreeNode
         Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
         Dim i As Integer = 0
-        'Dim ipName As String
-        'Dim pcName As String
         Try
             While i < size - 1
                 Dim thread As Thread = New System.Threading.Thread(Sub() Me.ReturnPCName(i))
