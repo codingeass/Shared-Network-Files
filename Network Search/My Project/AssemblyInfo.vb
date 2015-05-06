@@ -9,8 +9,8 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Network Search")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyDescription("This application helps in searching for shared files in the local network. You can contribute or report issues in the project on github. vbNewLine https://github.com/codingeass/Shared-Network-Files/ vbNewLine vbNewLine Icon © Pokémon vbNewLine Unicorn © github vbNewLine Author: Amandeep Gupta")> 
+<Assembly: AssemblyCompany("codingeass.github.io")> 
 <Assembly: AssemblyProduct("Network Search")> 
 <Assembly: AssemblyCopyright("Copyright ©  2015")> 
 <Assembly: AssemblyTrademark("")> 
