@@ -53,7 +53,7 @@ Public Class Form1
         '    str = str + " " + res1(i) + "=" + i.ToString
         '    i += 1
         'End While
-
+        Dim nodeCount As Integer = 0
         'MsgBox(res1(2))
         'Tree code
         Dim root = New TreeNode("Network")
@@ -72,6 +72,7 @@ Public Class Form1
                     'EnterTheFolder(res1(2), treeIp)
                     Dim thread1 As Thread = New System.Threading.Thread(Sub() Me.EnterTheFolder(res1(2), treeIp))
                     thread1.Start()
+                    nodeCount += 1
                     'TreeView1.Nodes(0).Nodes.Add(New TreeNode(System.Net.Dns.GetHostEntry(res1(2)).HostName.ToString))
                 Catch
                 End Try
@@ -79,6 +80,7 @@ Public Class Form1
             End If
             i += 1
         End While
+        Label4.Text = "Count : " & nodeCount
         TextBox1.Text = GetHostName()
 
 
@@ -133,7 +135,7 @@ Public Class Form1
     End Sub
 
     Sub FindingThreats()
-        ListView1.Items.Clear()
+        'ListView1.Items.Clear()
         Dim childEntry As DirectoryEntry
         Dim ParentEntry As New DirectoryEntry
         Try
@@ -162,7 +164,7 @@ Public Class Form1
     Sub FindingHost()
         For i = 1 To 254
             Try
-                RichTextBox1.AppendText("Host name =  " & System.Net.Dns.GetHostEntry("172.17.220." & i.ToString).HostName.ToString & vbCrLf & vbCrLf)
+                'RichTextBox1.AppendText("Host name =  " & System.Net.Dns.GetHostEntry("172.17.220." & i.ToString).HostName.ToString & vbCrLf & vbCrLf)
             Catch ex As Exception
             End Try
         Next
@@ -195,7 +197,7 @@ Public Class Form1
             End If
             i += 1
         End While
-        RichTextBox1.Text = i
+        Label4.Text = "Count : " & i
     End Sub
 
     Private Shared Function GetMachineNameFromIPAddress(ipAdress As String) As String
@@ -223,7 +225,7 @@ Public Class Form1
                 i += 1
             End While
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
         End Try
     End Sub
 
