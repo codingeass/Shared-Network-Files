@@ -34,16 +34,17 @@ Public Class Form1
     Public Function GetIpAddress() As String
         Return Dns.GetHostEntry(GetHostName()).AddressList(0).ToString()
     End Function
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label1.Text = "All Ip's Sharing data in Network"
-        FindingThreats()
-        Me.BackColor = Color.DarkSlateGray
+        'FindingThreats()
+        'Me.BackColor = Color.DarkSlateGray
         Dim result As String = GetProcessText("arp", "-a", "")
         'MsgBox(result)
         'Dim regex As Regex = New Regex("(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])", RegexOptions.IgnoreCase)
         'Dim match As Match = regex.Match(result)
         'MsgBox(match.Groups(1).Value & "hello")
-        Dim res() As String = result.Split(New String() {Environment.NewLine},StringSplitOptions.RemoveEmptyEntries)
+        Dim res() As String = result.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
         Dim res1() As String
         Dim i As Integer
         'Dim i As Integer
@@ -146,8 +147,7 @@ Public Class Form1
                         For Each SubChildEntry In SubParentEntry.Children
                             Select Case SubChildEntry.SchemaClassName
                                 Case "Computer"
-                                    ListView1.Items.Add(SubChildEntry.Name)
-
+                                    'ListView1.Items.Add(SubChildEntry.Name)
                             End Select
                         Next
                 End Select
@@ -179,7 +179,6 @@ Public Class Form1
     'Code to remove nodes from treeview1 to treeview2 that have not shared any data
     Sub RemoveNodeTree()
         Dim treeIp As TreeNode
-
         Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
         Dim i As Integer
         treeIp = New TreeNode("Network")
@@ -194,24 +193,61 @@ Public Class Form1
                 size -= 1
                 i -= 1
             End If
-            
-            'If treeIp.Nodes.Count = 0 Then
-            '    TreeView2.Nodes.Add(treeIp)
-            'End If
             i += 1
         End While
-
-        'For Each treeIp In TreeView1.Nodes(0).Nodes
-        '    If (treeIp.Nodes.Count = 0) Then
-        '        TreeView2.Nodes.Add(treeIp)
-        '    End If
-        'Next
-
         RichTextBox1.Text = i
+    End Sub
+
+    Private Shared Function GetMachineNameFromIPAddress(ipAdress As String) As String
+        Dim machineName As String = String.Empty
+        Try
+            Dim hostEntry As IPHostEntry = Dns.GetHostEntry(ipAdress)
+
+            machineName = hostEntry.HostName
+            ' Machine not found...
+        Catch ex As Exception
+        End Try
+        Return machineName
+    End Function
+
+    Sub AssignPCname()
+        'Dim treeIp As TreeNode
+        Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
+        Dim i As Integer
+        'Dim ipName As String
+        'Dim pcName As String
+        Try
+            While i < size - 1
+                Dim thread As Thread = New System.Threading.Thread(Sub() Me.ReturnPCName(i))
+                thread.Start()
+                i += 1
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub ReturnPCName(s As Integer)
+        Dim ipName As String
+        Dim pcName As String
+        Dim treeIp As TreeNode
+        treeIp = TreeView1.Nodes(0).Nodes(s)
+        ipName = treeIp.Text
+        pcName = GetMachineNameFromIPAddress(ipName)
+        If pcName = "" Then
+            Return
+        End If
+
+        If TreeView1.InvokeRequired Then
+            TreeView1.Invoke(DirectCast(Sub() treeIp.Text = pcName, MethodInvoker))
+        Else
+            treeIp.Text = pcName
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Label1.Text = "Shared files in Network"
         RemoveNodeTree()
+        AssignPCname()
     End Sub
 End Class
