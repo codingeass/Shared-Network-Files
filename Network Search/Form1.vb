@@ -228,14 +228,10 @@ Public Class Form1
             'MsgBox(ex.Message)
         End Try
     End Sub
-    ''' <summary>
-    ''' replaces pcNames from ip in treeView1
-    ''' </summary>
-    ''' <param name="s">position of element in treeView</param>
-    ''' <remarks>Helper function for AssignPCname</remarks>
+
     Sub ReturnPCName(s As Integer)
         Dim ipName As String
-        Dim pcName As String
+        Dim pcName As String = ""
         Dim treeIp As TreeNode
         treeIp = TreeView1.Nodes(0).Nodes(s)
         ipName = treeIp.Text
