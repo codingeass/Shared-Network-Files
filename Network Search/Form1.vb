@@ -160,6 +160,12 @@ Public Class Form1
         Next
     End Sub
 
+    ''' <summary>
+    ''' To open network folder selected
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
         Try
             Dim path As String = TreeView1.SelectedNode.FullPath.ToString.Replace("Network", "\")
@@ -168,7 +174,10 @@ Public Class Form1
         End Try
     End Sub
 
-    'Code to remove nodes from treeview1 to treeview2 that have not shared any data
+    ''' <summary>
+    ''' Remove nodes from treeview1 to treeview2 that have not shared any data
+    ''' </summary>
+    ''' <remarks></remarks>
     Sub RemoveNodeTree()
         Dim treeIp As TreeNode
         Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
@@ -189,7 +198,12 @@ Public Class Form1
         End While
         Label4.Text = "Count : " & i
     End Sub
-
+    ''' <summary>
+    ''' Return pc name from ip
+    ''' </summary>
+    ''' <param name="ipAdress"></param>
+    ''' <returns></returns>
+    ''' <remarks>Helper function for ReturnPCName</remarks>
     Private Shared Function GetMachineNameFromIPAddress(ipAdress As String) As String
         Dim machineName As String = String.Empty
         Try
@@ -202,6 +216,10 @@ Public Class Form1
         Return machineName
     End Function
 
+    ''' <summary>
+    ''' starting thread for pcName change
+    ''' </summary>
+    ''' <remarks></remarks>
     Sub AssignPCname()
         Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
         Dim i As Integer = 0
@@ -215,7 +233,11 @@ Public Class Form1
             'MsgBox(ex.Message)
         End Try
     End Sub
-
+    ''' <summary>
+    ''' replaces pcNames from ip in treeView1
+    ''' </summary>
+    ''' <param name="s"></param>
+    ''' <remarks>Helper function for AssignPCname</remarks>
     Sub ReturnPCName(s As Integer)
         Dim ipName As String
         Dim pcName As String
@@ -234,6 +256,12 @@ Public Class Form1
         End If
     End Sub
 
+    ''' <summary>
+    ''' Clear nodes from treeView1 which are not sharing data and transfer to treeView2 and show pcName in treeView1
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Label1.Text = "Shared files in Network"
         RemoveNodeTree()
@@ -245,6 +273,12 @@ Public Class Form1
         AboutUs.Show()
     End Sub
 
+    ''' <summary>
+    ''' To refresh nodes
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks>Refresh done by clearing content of treeviews and then loading the Form1 again</remarks>
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         TreeView1.Nodes.Clear()
         TreeView2.Nodes.Clear()
