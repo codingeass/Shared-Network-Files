@@ -39,22 +39,14 @@ Public Class Form1
         'FindingThreats()
         'Me.BackColor = Color.DarkSlateGray
         Dim result As String = GetProcessText("arp", "-a", "")
-        'MsgBox(result)
+
         'Dim regex As Regex = New Regex("(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])", RegexOptions.IgnoreCase)
         'Dim match As Match = regex.Match(result)
-        'MsgBox(match.Groups(1).Value & "hello")
+
         Dim res() As String = result.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
         Dim res1() As String
         Dim i As Integer
-        'Dim i As Integer
-        'Dim str As String = ""
-        'While i < res1.Length
-        '    str = str + " " + res1(i) + "=" + i.ToString
-        '    i += 1
-        'End While
         Dim nodeCount As Integer = 0
-        'MsgBox(res1(2))
-        'Tree code
         Dim root = New TreeNode("Network")
         TreeView1.Nodes.Add(root)
         Dim treeIp As TreeNode
@@ -117,7 +109,7 @@ Public Class Form1
                     counter = 1
                     'TreeView1.Nodes(0).Nodes(TreeView1.Nodes(0).Nodes.IndexOf(treeIp)).Nodes.Add(New TreeNode(Trim(res(i).Replace("Disk", ""))))
                 Catch m As Exception
-                    MsgBox(m.Message)
+                    'MsgBox(m.Message)
                 End Try
             End If
             i += 1
@@ -186,14 +178,17 @@ Public Class Form1
         TreeView2.Nodes.Add(treeIp)
         i = 0
         While i < size
-            treeIp = TreeView1.Nodes(0).Nodes(i)
-            If treeIp.Nodes.Count = 0 Then
-                treeIp = New TreeNode(TreeView1.Nodes(0).Nodes(i).Text)
-                TreeView1.Nodes(0).Nodes(i).Remove()
-                TreeView2.Nodes.Add(treeIp)
-                size -= 1
-                i -= 1
-            End If
+            Try
+                treeIp = TreeView1.Nodes(0).Nodes(i)
+                If treeIp.Nodes.Count = 0 Then
+                    treeIp = New TreeNode(TreeView1.Nodes(0).Nodes(i).Text)
+                    TreeView1.Nodes(0).Nodes(i).Remove()
+                    TreeView2.Nodes.Add(treeIp)
+                    size -= 1
+                    i -= 1
+                End If
+            Catch
+            End Try
             i += 1
         End While
         Label4.Text = "Count : " & i
@@ -236,7 +231,7 @@ Public Class Form1
     ''' <summary>
     ''' replaces pcNames from ip in treeView1
     ''' </summary>
-    ''' <param name="s"></param>
+    ''' <param name="s">position of element in treeView</param>
     ''' <remarks>Helper function for AssignPCname</remarks>
     Sub ReturnPCName(s As Integer)
         Dim ipName As String
@@ -248,12 +243,14 @@ Public Class Form1
         If pcName = "" Then
             Return
         End If
-
-        If TreeView1.InvokeRequired Then
-            TreeView1.Invoke(DirectCast(Sub() treeIp.Text = pcName, MethodInvoker))
-        Else
-            treeIp.Text = pcName
-        End If
+        Try
+            If TreeView1.InvokeRequired Then
+                TreeView1.Invoke(DirectCast(Sub() treeIp.Text = pcName, MethodInvoker))
+            Else
+                treeIp.Text = pcName
+            End If
+        Catch
+        End Try
     End Sub
 
     ''' <summary>
