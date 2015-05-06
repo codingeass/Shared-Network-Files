@@ -4,7 +4,6 @@ Imports System.Threading
 Imports System.Net
 Imports System.Text.RegularExpressions
 Public Class Form1
-    Dim thread As Thread
     Public Function GetHostName() As String
         Return Dns.GetHostName()
     End Function
@@ -63,15 +62,20 @@ Public Class Form1
         While i < res.Length
             'TreeView1.Nodes.Clear()
             res1 = Split(res(i))
-            If (res1(2)(0) <> "2") Then
+
+            If res1(2)(0) = "I" Then
+                Exit While
+            End If
+
+            If (res1(2)(0) <> "2" Or res1(0) <> "") Then
                 Try
                     treeIp = New TreeNode(res1(2))
                     treeIp.Name = res1(2)
                     treeIp.Text = res1(2)
                     TreeView1.Nodes(0).Nodes.Add(treeIp)
                     'EnterTheFolder(res1(2), treeIp)
-                    Dim thread1 As Thread = New System.Threading.Thread(Sub() Me.EnterTheFolder(res1(2), treeIp))
-                    thread1.Start()
+                    Dim thread As Thread = New System.Threading.Thread(Sub() Me.EnterTheFolder(res1(2), treeIp))
+                    thread.Start()
                     nodeCount += 1
                     'TreeView1.Nodes(0).Nodes.Add(New TreeNode(System.Net.Dns.GetHostEntry(res1(2)).HostName.ToString))
                 Catch
@@ -215,7 +219,7 @@ Public Class Form1
     Sub AssignPCname()
         'Dim treeIp As TreeNode
         Dim size As Integer = TreeView1.Nodes(0).Nodes.Count
-        Dim i As Integer
+        Dim i As Integer = 0
         'Dim ipName As String
         'Dim pcName As String
         Try
@@ -251,5 +255,17 @@ Public Class Form1
         Label1.Text = "Shared files in Network"
         RemoveNodeTree()
         AssignPCname()
+        Button1.Enabled = False
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        AboutUs.Show()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        TreeView1.Nodes.Clear()
+        TreeView2.Nodes.Clear()
+        Button1.Enabled = True
+        Me.Form1_Load(sender, e)
     End Sub
 End Class
