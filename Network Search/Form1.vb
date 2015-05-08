@@ -278,4 +278,10 @@ Public Class Form1
         Button1.Enabled = True
         Me.Form1_Load(sender, e)
     End Sub
+
+    Private Sub Form1_Close(sender As Object, e As EventArgs) Handles MyBase.FormClosing
+        Application.ExitThread()
+        Me.Dispose()
+    End Sub
+
 End Class
