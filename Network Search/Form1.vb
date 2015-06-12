@@ -4,6 +4,8 @@ Imports System.Threading
 Imports System.Net
 Imports System.Text.RegularExpressions
 Public Class Form1
+    Dim version As Double = 1.5
+
     Public Function GetHostName() As String
         Return Dns.GetHostName()
     End Function
@@ -77,8 +79,6 @@ Public Class Form1
         End While
         Label4.Text = "Count : " & nodeCount
         TextBox1.Text = GetHostName()
-
-
         '' for context menu
         'For Each RootNode As TreeNode In TreeView1.Nodes
         '    RootNode.ContextMenuStrip = ContextMenuStrip1
@@ -262,10 +262,6 @@ Public Class Form1
         Button1.Enabled = False
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        AboutUs.Show()
-    End Sub
-
     ''' <summary>
     ''' To refresh nodes
     ''' </summary>
@@ -284,4 +280,42 @@ Public Class Form1
         Me.Dispose()
     End Sub
 
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        AboutUs.Show()
+    End Sub
+
+    Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
+        TreeView1.Nodes.Clear()
+        TreeView2.Nodes.Clear()
+        Button1.Enabled = True
+        Me.Form1_Load(sender, e)
+    End Sub
+
+    Private Sub SeparateNetworkToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeparateNetworkToolStripMenuItem.Click
+        Label1.Text = "Shared files in Network"
+        RemoveNodeTree()
+        AssignPCname()
+        Button1.Enabled = False
+    End Sub
+
+    Private Sub CheckUpdateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckUpdateToolStripMenuItem.Click
+        Try
+            enteredUrl = "http://codingeass.github.io/manga-Downloader/update.xml"
+            Dim request As HttpWebRequest = WebRequest.Create(enteredUrl)
+            request.UserAgent = ".NET Framework Test Client"
+            Dim response As HttpWebResponse = request.GetResponse()
+            Dim reader As StreamReader = New StreamReader(response.GetResponseStream())
+            Dim str As String = reader.ReadToEnd
+            Dim regex As Regex = New Regex("<update name=""network"">.*?</update>")
+            Dim regexStr As String = "<update name=""network"">.*?<\/update>"
+            Dim match As Match = regex.Match(str, regexStr, RegexOptions.IgnoreCase Or RegexOptions.Singleline)
+            If match.Success Then
+                MsgBox("Are you sure you want to update?")
+            Else
+                MsgBox("Already Updated")
+            End If
+        Catch
+            MsgBox("Check Your Connection")
+        End Try
+    End Sub
 End Class

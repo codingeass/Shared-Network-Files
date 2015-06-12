@@ -34,9 +34,18 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SeparateNetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckUpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -51,10 +60,10 @@ Partial Class Form1
         'TreeView1
         '
         Me.TreeView1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.TreeView1.Location = New System.Drawing.Point(16, 52)
+        Me.TreeView1.Location = New System.Drawing.Point(16, 78)
         Me.TreeView1.Margin = New System.Windows.Forms.Padding(4)
         Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(411, 362)
+        Me.TreeView1.Size = New System.Drawing.Size(411, 336)
         Me.TreeView1.TabIndex = 4
         '
         'ContextMenuStrip1
@@ -71,10 +80,10 @@ Partial Class Form1
         '
         'TreeView2
         '
-        Me.TreeView2.Location = New System.Drawing.Point(489, 52)
+        Me.TreeView2.Location = New System.Drawing.Point(489, 78)
         Me.TreeView2.Margin = New System.Windows.Forms.Padding(4)
         Me.TreeView2.Name = "TreeView2"
-        Me.TreeView2.Size = New System.Drawing.Size(401, 362)
+        Me.TreeView2.Size = New System.Drawing.Size(401, 336)
         Me.TreeView2.TabIndex = 5
         '
         'Button1
@@ -90,7 +99,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(31, 11)
+        Me.Label1.Location = New System.Drawing.Point(29, 38)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(153, 17)
@@ -100,7 +109,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(503, 11)
+        Me.Label2.Location = New System.Drawing.Point(502, 38)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(136, 17)
@@ -120,20 +129,11 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(338, 31)
+        Me.Label4.Location = New System.Drawing.Point(324, 57)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(57, 17)
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Count : "
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(1, 476)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(93, 30)
-        Me.Button2.TabIndex = 11
-        Me.Button2.Text = "About Us"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -144,13 +144,72 @@ Partial Class Form1
         Me.Button3.Text = "Refresh ↺"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(921, 24)
+        Me.MenuStrip1.TabIndex = 13
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.SeparateNetworkToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'NewToolStripMenuItem
+        '
+        Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.NewToolStripMenuItem.Text = "New Search"
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.CheckUpdateToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'ViewHelpToolStripMenuItem
+        '
+        Me.ViewHelpToolStripMenuItem.Name = "ViewHelpToolStripMenuItem"
+        Me.ViewHelpToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ViewHelpToolStripMenuItem.Text = "View Help"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'SeparateNetworkToolStripMenuItem
+        '
+        Me.SeparateNetworkToolStripMenuItem.Name = "SeparateNetworkToolStripMenuItem"
+        Me.SeparateNetworkToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.SeparateNetworkToolStripMenuItem.Text = "Separate Network"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'CheckUpdateToolStripMenuItem
+        '
+        Me.CheckUpdateToolStripMenuItem.Name = "CheckUpdateToolStripMenuItem"
+        Me.CheckUpdateToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CheckUpdateToolStripMenuItem.Text = "Check Update"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(921, 507)
+        Me.ClientSize = New System.Drawing.Size(921, 479)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -167,6 +226,8 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Network Searcher"
         Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -181,7 +242,15 @@ Partial Class Form1
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ViewHelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SeparateNetworkToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CheckUpdateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
